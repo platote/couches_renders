@@ -1,6 +1,6 @@
 # couches_renders
 Generating multiples renders of couches from @byWassies
-
+![image](https://github.com/platote/couches_renders/assets/84842352/69269576-cc87-45a0-b770-769244de53ab)
 ## ADDON SETUP
     1) Download the whole folder, and work within this folder
     2) Open the Blender file. Go to Edit -> Preferences -> Addons -> Install and select render_batch_coutches.py (a panel "COUCHES" is there like pic below
