@@ -86,12 +86,6 @@ class TLA_PT_sidebar(Panel):
         box.prop(mytool, "id1")
         box.operator(TLA_OT_operator.bl_idname, text="Generate a couch")
 
-        # col = self.layout.column(align=True)
-        # prop = col.operator(TLA_OT_operator.bl_idname, text="Generate a couch")
-        # row = self.layout.row()
-        # mytool = context.scene.my_tool
-        # col.prop(mytool, "id")
-        # col.prop(mytool, "id1")
 
 class TLA_OT_DeleteExceptCameraLights(bpy.types.Operator):
     bl_idname = "scene.delete_except_camera_lights"
@@ -108,35 +102,6 @@ class TLA_OT_DeleteExceptCameraLights(bpy.types.Operator):
         return {'FINISHED'}
 
 
-
-# class TLA_OT_PlaceTestCouch(bpy.types.Operator):
-#     bl_idname = "scene.place_test_couch"
-#     bl_label = "Place Test Couch"
-#     bl_description = "Places a test couch in the scene"
-
-#     def execute(self, context):
-#         # Logic for placing the test couch goes here
-#         base_couch_fp = os.path.join(os.path.dirname(bpy.data.filepath), "Couches/Couch/BaseCouch.fbx")
-#         bpy.ops.import_scene.fbx(filepath=base_couch_fp)
-
-#         for o in bpy.data.objects:
-#             if ('Armature' in o.name):
-#                 couch_armature = o
-
-#         fbx_to_vrm_scale = 0.15
-#         bpy.ops.object.select_all(action='DESELECT')
-#         couch_armature.select_set(True)
-#         bpy.context.view_layer.objects.active = couch_armature
-#         bpy.ops.transform.resize(value=(fbx_to_vrm_scale, fbx_to_vrm_scale, fbx_to_vrm_scale))
-#         bpy.ops.object.select_all(action='DESELECT')
-
-#         # couch_armature.location.z += -1.8869
-#         couch_armature.location.z += -1.49362
-
-#         # For demonstration, let's just create a new cube as a placeholder for the couch
-#         # bpy.ops.mesh.primitive_cube_add(size=2)
-
-#         return {'FINISHED'}
     
 class TLA_OT_operator(Operator):
     """ tooltip goes here """
@@ -260,41 +225,7 @@ class TLA_OT_operator(Operator):
                 emission_material = create_emission_material(path)
                 emission_material.name = f"emission_{obj.name}"
                 obj.data.materials[1] = emission_material
-                # _mat.name = f"emission_{obj.name}"
 
-            # mat.use_nodes = True
-            # nodes = mat.node_tree.nodes
-            # links = mat.node_tree.links
-            # links.clear()
-            # nodes.clear()
-
-            # shader = nodes.new("ShaderNodeGroup")
-            # shader.node_tree = bpy.data.node_groups['MToon_unversioned']
-            # output = nodes.new(type='ShaderNodeOutputMaterial')
-            # links.new(shader.outputs[0], output.inputs[0])
-            # texImage = nodes.new('ShaderNodeTexImage')
-            # texImage.image = bpy.data.images.load(path)
-            # links.new(shader.inputs['MainTexture'], texImage.outputs['Color'])
-            # links.new(shader.inputs['ShadeTexture'], texImage.outputs['Color'])
-
-            # if 'Eyes' in obj.name:
-            #     shader.inputs['ShadeColor'].default_value = (1, 1, 1, 1)
-
-            # if matcap_file:
-            #     matcap = nodes.new("ShaderNodeGroup")
-            #     matcap.node_tree = bpy.data.node_groups['matcap_vector']
-            #     sphImage = nodes.new('ShaderNodeTexImage')
-            #     sphImage.image = bpy.data.images.load(os.path.join(os.path.dirname(bpy.data.filepath), f"matcap/{matcap_file}"))
-            #     links.new(sphImage.inputs['Vector'], matcap.outputs['Vector'])
-            #     links.new(shader.inputs['SphereAddTexture'], sphImage.outputs['Color'])
-
-            # if outline:
-            #     if "Beak" in obj.name:
-            #         shader.inputs['OutlineWidth'].default_value = 0.08
-            #     else:
-            #         shader.inputs['OutlineWidth'].default_value = 0.138
-            #     shader.inputs['OutlineWidthMode'].default_value = 1.0
-            #     shader.inputs['OutlineColor'].default_value = outline_color
             obj.data.materials[0] = mat
 
         fbx_to_vrm_scale = 0.15
@@ -545,11 +476,7 @@ class TLA_OT_operator(Operator):
                 couch_armature.select_set(True)
                 bpy.context.view_layer.objects.active = couch_armature
                 bpy.ops.transform.resize(value=(fbx_to_vrm_scale, fbx_to_vrm_scale, fbx_to_vrm_scale))
-                # armature.location.z += -1.26147
-                # armature.location.z += -0.168099 
                 bpy.ops.object.select_all(action='DESELECT')
-
-                # couch_armature.location.z += -1.8869
                 couch_armature.location.z += -1.49362
 
                 
@@ -572,28 +499,6 @@ class TLA_OT_operator(Operator):
                         blend_shape_groups.weight = 1
                 bpy.ops.object.select_all(action='DESELECT')
 
-                bpy.ops.object.select_all(action='DESELECT')
-                couch_armature.select_set(True)
-                bpy.ops.vrm.load_human_bone_mappings(filepath="C:\\Users\\plato\\Documents\\assets\\generator_1\\armature.json")
-                bpy.ops.object.select_all(action='DESELECT')
-
-                # img_path = os.path.join(os.path.dirname(bpy.data.filepath), f"scripts/pics/images/{id}.png")
-
-                # bpy.ops.object.select_all(action='DESELECT')
-                # couch_armature.select_set(True)
-                # bpy.context.view_layer.objects.active = couch_armature
-                # # bpy.context.object.data.vrm_addon_extension.vrm0.meta.texture = image_from_data(f"Wassie {id}", img_data)
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.texture = bpy.data.images.load(img_path)
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.title = f"Couch {id}"
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.version = "1.00"
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.author = "byWassies"
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.reference = f"https://opensea.io/assets/ethereum/0x1d20a51f088492a0f1c57f047a9e30c9ab5c07ea/{id}"
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.allowed_user_name = 'ExplicitlyLicensedPerson'
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.contact_information = "https://www.bywassies.com/"
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.violent_ussage_name = 'Allow'
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.sexual_ussage_name = 'Allow'
-                # bpy.context.object.data.vrm_addon_extension.vrm0.meta.sexual_ussage_name = 'Allow'
-                # bpy.ops.object.select_all(action='DESELECT')
                 
                 bpy.context.scene.camera = bpy.data.objects['Camera']
 
@@ -601,24 +506,14 @@ class TLA_OT_operator(Operator):
                 export_fp = os.path.join(os.path.dirname(bpy.data.filepath), export_fp_base)
 
                 bpy.context.scene.render.filepath = export_fp
-                # bpy.context.scene.render.image_settings.file_format = 'JPEG'
                 bpy.context.scene.render.image_settings.file_format = 'PNG'
                 bpy.context.scene.render.image_settings.color_mode = 'RGBA'
                 bpy.context.scene.render.image_settings.color_depth = '8'  # You can change to '16' for 16-bit PNGs
 
                 bpy.ops.render.render(write_still=True)
 
-                # bpy.ops.object.select_all(action='DESELECT')
-                # bpy.ops.object.select_all(action='SELECT')
-                # export_fp_base = f"exports/couch_prod/Couch {id}.vrm"
-                # export_fp = os.path.join(os.path.dirname(bpy.data.filepath), export_fp_base)
-                # bpy.ops.export_scene.vrm(filepath=export_fp, export_invisibles=False, export_only_selections=False)
-                # bpy.ops.object.select_all(action='DESELECT')
-
 
                 if context.scene.generate_batches:
-                    # bpy.ops.object.select_all(action='SELECT')
-                    # bpy.ops.object.delete(use_global=False)
 
                     for material in bpy.data.materials:
                         if material.name == "Sage" or material.name == "Shaman" or material.name == "transpraent" or material.name == "transparent_Dissected":
@@ -630,14 +525,8 @@ class TLA_OT_operator(Operator):
                     for mesh in bpy.data.meshes:
                         bpy.data.meshes.remove(mesh)
 
-                    # for obj in context.scene.objects:
-                    #     # Check the object's type and delete if it's not a camera or light
-                    #     if obj.type not in ['CAMERA', 'LIGHT']:
-                    #         bpy.data.objects.remove(obj, do_unlink=True)
                         
                     for object in bpy.data.objects:
-                        # bpy.data.objects.remove(object)
-                        # Check the object's type and delete if it's not a camera or light
                         if object.type not in ['CAMERA', 'LIGHT']:
                             bpy.data.objects.remove(object, do_unlink=True)
 
